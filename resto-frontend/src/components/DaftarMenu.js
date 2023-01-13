@@ -99,20 +99,21 @@ const DaftarMenu = () => {
           gridTemplateColumns: "1fr 1fr 1fr 1fr",
           display: "grid",
           gap: "2rem",
+          maxWidth: "1280px",
         }}
       >
         {/* <Image src={babu} /> */}
         {menu &&
           menu.map((menu, index) => {
             return (
-              <Card key={index} style={{ width: "15rem", marginLeft: "2rem" }}>
+              <Card key={index} style={{ width: "15rem" }}>
                 <Card.Img
                   variant="top"
                   src={require(`../images/${menu.gambar}`)}
                 />
                 <Card.Body style={{ textAlign: "Center" }}>
                   <Card.Title>{menu.menu}</Card.Title>
-                  <Card.Text>{menu.harga}</Card.Text>
+                  <Card.Text>Rp. {menu.harga}</Card.Text>
                   <Button
                     variant="primary"
                     style={{ width: "10rem" }}

@@ -9,9 +9,9 @@ import axios from "axios";
 const Pesanan = () => {
   const [order, setOrder] = useState([]);
   const idUser = localStorage.getItem("id_user");
-  const [total, settotal] = useState(0);
+  const [total, settotal] = useState([]);
 
-  const pesanan = async () => {
+  const pesananBuyer = async () => {
     try {
       await axios.get(`http://localhost:8080/api/pemesanan`).then((res) => {
         setOrder(res.data.data);
@@ -21,29 +21,15 @@ const Pesanan = () => {
     }
   };
 
-  // console.log(order);
-
   useEffect(() => {
-    pesanan();
-  }, [pesanan]);
-
-  const price = [];
-  console.log(price);
-  var count = 0;
-
-  for (var i = 0; i < price.length; i++) {
-    if (price[i] === 1) {
-      count++;
-    }
-  }
-
-  console.log(count);
+    pesananBuyer();
+  }, []);
 
   return (
     <div>
       <Header />
       <h4 style={{ marginTop: "2rem", textAlign: "center" }}>PESANAN ANDA</h4>
-      <Dropdown style={{ marginLeft: "2rem" }}>
+      {/* <Dropdown style={{ marginLeft: "2rem" }}>
         <Dropdown.Toggle variant="light" id="dropdown-basic">
           10
         </Dropdown.Toggle>
@@ -53,13 +39,8 @@ const Pesanan = () => {
           <Dropdown.Item href="#/action-2">25</Dropdown.Item>
           <Dropdown.Item href="#/action-3">50</Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown> */}
 
-      {/* {order &&
-        order
-          .filter((order) => order.id_user === idUser)
-          .map((order, index) => {
-            return ( */}
       <div className="table-responsive" style={{ marginTop: "3rem" }}>
         <table className="table">
           <thead>
@@ -94,24 +75,22 @@ const Pesanan = () => {
               </th>
             </tr>
           </thead>
-
-          {console.log(order)}
           <tbody>
             {order &&
               order
                 .filter(
                   (order) => order.id_user == idUser && order.produks.length > 0
                 )
-                .map((order, index) => {
+                .map((ord, index) => {
+                  console.log(ord.produks[0]?.harga);
                   return (
                     <>
                       <tr>
                         <td>{index + 1}</td>
-                        <td>{order.produks[0]?.menu}</td>
-                        <td>{order.produks[0]?.harga}</td>
-                        {price.push(order.produks[0]?.harga)}
+                        <td>{ord.produks[0]?.menu}</td>
+                        <td>{ord.produks[0]?.harga}</td>
                         <td>1</td>
-                        <td>{order.produks[0]?.harga}</td>
+                        <td>{ord.produks[0]?.harga}</td>
                         <td>
                           <button className="btn btn-sm btn-danger">
                             <em className="fas fa-trash"></em>

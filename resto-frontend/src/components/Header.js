@@ -9,6 +9,8 @@ import Pesanan from "./Pesanan";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const idUser = localStorage.getItem("id_user");
+
   return (
     <div>
       <div>
@@ -28,7 +30,9 @@ const Header = () => {
           <div style={{ textAlign: "center" }}>
             <h1 style={{ fontSize: "28pt", fontWeight: "bold" }}>RESTBABU</h1>
             <br />
-            <p style={{ fontSize: "14pt" }}>Silahkan Pesan Menu Sesuai Keinginan Anda Enjoy Your Meal</p>
+            <p style={{ fontSize: "14pt" }}>
+              Silahkan Pesan Menu Sesuai Keinginan Anda Enjoy Your Meal
+            </p>
           </div>
         </div>
       </div>
@@ -43,7 +47,11 @@ const Header = () => {
             {/* <Link to="/Pesanan"> */}
             <Nav.Link href="/Pesanan">Pesanan Anda</Nav.Link>
             {/* </Link> */}
-            <Nav.Link href="/Login">Log out</Nav.Link>
+            {idUser ? (
+              <Nav.Link href="/Login">Logout</Nav.Link>
+            ) : (
+              <Nav.Link href="/Login">Login</Nav.Link>
+            )}
           </Nav>
         </Container>
       </Navbar>
